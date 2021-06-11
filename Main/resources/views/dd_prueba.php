@@ -98,18 +98,16 @@
 <div style="text-align: center;">
         <br><br><br><br>
         <select name="select_carreras" id="carreras">
-        <?php 
-        
-        include_once('db_consulta.php');
+        <?php         
 
         // Inyectamos un id de un alumno random a modo de prueba
-        $resultado = BuscarCarrera(1428697); //Aunque directamente con el include podria usar la variable $resultado sin el return pero supongo que es buena practica o algo asi
+        $resultados = \App\Http\Services\db_cosulta::BuscarCarrera(1428697);
 
         ?> 
         <!-- Esto tambien se puede hacer con un foreach , seria foreach($resultado as $resultado){} -->
-        <?php while($reg = pg_fetch_array($resultado,null,PGSQL_ASSOC,)){ ?> <!-- En teoria recorre uno por uno los datos devuelvo en consulta por la funcion consulta_db , es parecido a mysqli_fetch_array() -->
+        <?php for($i = 0; $i<count($resultados); $i++){ ?> <!-- En teoria recorre uno por uno los datos devuelvo en consulta por la funcion consulta_db , es parecido a mysqli_fetch_array() -->
 
-            <option value="<?= $reg['alcc_idalucarrcurs'] ?>"><?= $reg['ccal_descripcion'] ?></option>
+            <option value="<?= $resultados[i]-> ?>"><?= $reg['ccal_descripcion'] ?></option>
 
             <?php } ?>
 
@@ -129,8 +127,8 @@
                 <th>Importe Pago</th>
                 <th>Opcion</th>
             </tr>
-            <?php $resultado = BuscarDeuda(5947235); //Recordemos que estamos inyectando este id de alumno, ojo: fijarse que si esta sea impago porque si es pago no trae nada ?> 
-            <?php while($reg = pg_fetch_array($resultado,null,PGSQL_ASSOC)){ ?> <!-- Recorro de nuevo las carreras para mostrarla en la tabla -->
+            <?php $resultado = \App\Http\Services\db_cosulta::BuscarDeuda(5947235); //TODO:Recordemos que estamos inyectando este id de alumno, ojo: fijarse que si esta sea impago porque si es pago no trae nada ?> 
+            <?php for($i = 0; $i<count($resultados); $i++){ ?> <!-- Recorro de nuevo las carreras para mostrarla en la tabla -->
                 <tr>
                  <td><?= $reg['paal_fechadeb']; ?></td>
                  <td><?= $reg['paal_tipopago']; ?></td>
