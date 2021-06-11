@@ -101,13 +101,21 @@
         <?php         
 
         // Inyectamos un id de un alumno random a modo de prueba
-        $resultados = \App\Http\Services\db_cosulta::BuscarCarrera(1428697);
-
+        //$resultados = \App\Http\Services\db_cosulta::BuscarCarrera(1428697)
+        $respuesta = App\Http\Controllers\DropDown_CarrerasCursos_Controller::BuscarCarreraController(1428697);
+        if($respuesta == -1 ){
+            //
+        }else if ( $respuesta == 0){
+            //
+        }else {
+            $resultados = (array) $respuesta;
+        }
+    
         ?> 
         <!-- Esto tambien se puede hacer con un foreach , seria foreach($resultado as $resultado){} -->
         <?php for($i = 0; $i<count($resultados); $i++){ ?> <!-- En teoria recorre uno por uno los datos devuelvo en consulta por la funcion consulta_db , es parecido a mysqli_fetch_array() -->
 
-            <option value="<?= $resultados[i]-> ?>"><?= $reg['ccal_descripcion'] ?></option>
+            <option value="<?= $resultados[$i]['alcc_idalucarrcurs'] ?>"><?= $resultados[$i]['ccal_descripcion'] ?></option>
 
             <?php } ?>
 
@@ -127,18 +135,20 @@
                 <th>Importe Pago</th>
                 <th>Opcion</th>
             </tr>
-            <?php $resultado = \App\Http\Services\db_cosulta::BuscarDeuda(5947235); //TODO:Recordemos que estamos inyectando este id de alumno, ojo: fijarse que si esta sea impago porque si es pago no trae nada ?> 
+
+            <?php ; //TODO:Recordemos que estamos inyectando este id de alumno, ojo: fijarse que si esta sea impago porque si es pago no trae nada ?> 
             <?php for($i = 0; $i<count($resultados); $i++){ ?> <!-- Recorro de nuevo las carreras para mostrarla en la tabla -->
                 <tr>
-                 <td><?= $reg['paal_fechadeb']; ?></td>
-                 <td><?= $reg['paal_tipopago']; ?></td>
-                 <td><?= $reg['paal_descripcion']; ?></td>
-                 <td><?= $reg['paal_importecuota']; ?></td>
-                 <td><?= $reg['paal_intereses']; ?></td>
-                 <td><?= $reg['paal_importepago']; ?></td>
+                 <td></td>
+                 <td></td>
+                 <td></td>
+                 <td></td>
+                 <td></td>
+                 <td></td>
                  <td><input type="checkbox" value="<?= $reg['paal_idpagoalumno'] ?>"></td> <!-- con checked veo si esta seleccionada -->
              </tr>
             <?php } ?>
+            
         </table>
         <br><br>
         <div class="container" style="text-align: center;">
