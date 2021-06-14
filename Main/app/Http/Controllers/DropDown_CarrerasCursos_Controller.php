@@ -9,21 +9,24 @@ class DropDown_CarrerasCursos_Controller extends Controller
         
         $resultados = \App\Models\Consultas::BuscarCarreraDao($idAlumno);
 
-        $row = pg_num_rows($resultados); //Retorna un entero y un -1 en caso de fallo
+        //$row = pg_num_rows($resultados); //Retorna un entero y un -1 en caso de fallo
 
-        if($row == -1){ //Si no trajo nada
+        /*if($row == -1){ //Si no trajo nada
             die("La consulta carrera no trajo un resultado");//TODO: die
-        }
+        }*/
+
+        //TODO: No nos piden validaciones pero podriamos hacerlas para que no quede vacia esta parte
+        
         return $resultados;    
     }
 
     public static function BuscarDeudasController($idalucarrcurs){
         $resultados = \App\Models\Consultas::BuscarDeudasDao($idalucarrcurs);
 
-        $row = pg_num_rows($resultados); //Retorna un entero y un -1 en caso de fallo
+        /*$row = pg_num_rows($resultados); //Retorna un entero y un -1 en caso de fallo
         if($row == -1){ //Si no trajo nada
            die("La consulta deuda no trajo un resultado");
-        }
+        }*/
 
         return $resultados;
     }

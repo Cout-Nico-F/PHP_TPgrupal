@@ -100,10 +100,15 @@
         <select name="select_carreras" id="carreras">
 
         <?php
-            $resultado = App\Http\Controllers\DropDown_CarrerasCursos_Controller::BuscarCarreraController(1428697);//TODO: Aca vamos a usar session para conseguir este id de alumno.
-            while($reg = pg_fetch_array($resultado,null,PGSQL_ASSOC,)){ ?> <!-- En teoria recorre uno por uno los datos devuelvo en consulta por la funcion consulta_db , es parecido a mysqli_fetch_array() -->
+            $resultado = json_decode(json_encode(App\Http\Controllers\DropDown_CarrerasCursos_Controller::BuscarCarreraController(1428697)), true);//TODO: Aca vamos a usar session para conseguir este id de alumno.
+            //convertimos el objeto en un array
+            //json_encode retorna un valor para que sea representado por json_decode enviamos el valor que queramos como primer parametro
+            //json_decode le eviamos un string JSON como primer parametro y como segundo un true que sirve para convertirlo en un array asociativo de modo que lo podamos recorrer con un foreach
+            //https://www.codewall.co.uk/how-to-fix-the-cannot-use-object-of-type-stdclass-as-array-error-in-php/ -> todo lo saque de aca el error era Cannot use object of type stdClass as array
+           
+           foreach($resultado as $res){ ?> <!-- En teoria recorre uno por uno los datos devuelvo en consulta por la funcion consulta_db , es parecido a mysqli_fetch_array() -->
             
-            <option value="<?= $reg['alcc_idalucarrcurs'] ?>"><?= $reg['ccal_descripcion'] ?></option>
+            <option value="<?= $res['alcc_idalucarrcurs'] ?>"><?=$res['ccal_descripcion']?></option> 
 
         <?php } ?>
 
@@ -123,10 +128,10 @@
                 <th>Opcion</th>
             </tr>
 
-            <?php ; //TODO:Recordemos que estamos inyectando este id de alumno, ojo: fijarse que si esta sea impago porque si es pago no trae nada 
+            <?php //TODO:Recordemos que estamos inyectando este id de alumno, ojo: fijarse que si esta sea impago porque si es pago no trae nada 
             
-            $resultado = App\Http\Controllers\DropDown_CarrerasCursos_Controller::BuscarDeudasController(5947235); //TODO: Aca vamos a usar session para conseguir este id de deudas.
-             while($reg = pg_fetch_array($resultado,null,PGSQL_ASSOC)){ ?> <!-- Recorro de nuevo las carreras para mostrarla en la tabla -->
+             $resultado = json_decode(json_encode(App\Http\Controllers\DropDown_CarrerasCursos_Controller::BuscarDeudasController(5947235)), true); 
+             foreach($resultado as $reg) { ?> <!-- Recorro de nuevo las carreras para mostrarla en la tabla -->
                 <tr>
                  <td><?= $reg['paal_fechadeb']; ?></td>
                  <td><?= $reg['paal_tipopago']; ?></td>
