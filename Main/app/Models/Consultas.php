@@ -17,10 +17,12 @@ class Consultas extends Model
 
         if(count($resultados) == 0){
             //"La consulta carrera no trajo un resultado"
+            die('La consulta carrera no trajo un resultado');
             return 0;
         }
         else if(count($resultados) > 1){
             //"la consulta trajo mas de un resultado, se esperaba uno"
+            die('la consulta trajo mas de un resultado, se esperaba uno');
             return -1;
         }
         //"consulta exitosa"

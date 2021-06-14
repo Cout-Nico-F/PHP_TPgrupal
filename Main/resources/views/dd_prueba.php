@@ -103,6 +103,7 @@
         // Inyectamos un id de un alumno random a modo de prueba
         //$resultados = \App\Http\Services\db_cosulta::BuscarCarrera(1428697)
         $respuesta = App\Http\Controllers\DropDown_CarrerasCursos_Controller::BuscarCarreraController(1428697);
+        $resultados = array(0);
         if($respuesta == -1 ){
             //
         }else if ( $respuesta == 0){
@@ -113,7 +114,7 @@
     
         ?> 
         <!-- Esto tambien se puede hacer con un foreach , seria foreach($resultado as $resultado){} -->
-        <?php for($i = 0; $i<count($resultados); $i++){ ?> <!-- En teoria recorre uno por uno los datos devuelvo en consulta por la funcion consulta_db , es parecido a mysqli_fetch_array() -->
+        <?php for($i = 0; $i<count((array)$resultados); $i++){ ?> <!-- En teoria recorre uno por uno los datos devuelvo en consulta por la funcion consulta_db , es parecido a mysqli_fetch_array() -->
 
             <option value="<?= $resultados[$i]['alcc_idalucarrcurs'] ?>"><?= $resultados[$i]['ccal_descripcion'] ?></option>
 
