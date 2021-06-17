@@ -119,6 +119,7 @@
         <div>
              <!-- No traigo muchos datos porque nose que va en la tabla -->
         <table style="margin: 0 auto;" border="2">
+            <caption>Tabla Deudas</caption>
             <tr>
                 <th>Fecha debito</th>
                 <th>Tipo pago</th>
@@ -153,6 +154,7 @@
     </form>
     <br><br><br>
     <table style="margin: 0 auto;" border="2">
+                <caption>Tabla idpagoalumnos </caption>
             <tr>
                 <th>ID Alumnos</th>
             </tr>
