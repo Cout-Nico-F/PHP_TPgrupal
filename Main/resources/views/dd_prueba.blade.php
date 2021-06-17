@@ -115,7 +115,8 @@
         </select>
 </div>
         <br><br><br><br><br><br>
-    <div>
+        <form action="" method="GET">
+        <div>
              <!-- No traigo muchos datos porque nose que va en la tabla -->
         <table style="margin: 0 auto;" border="2">
             <tr>
@@ -139,16 +140,33 @@
                  <td><?= $reg['paal_importecuota']; ?></td>
                  <td><?= $reg['paal_intereses']; ?></td>
                  <td><?= $reg['paal_importepago']; ?></td>
-                 <td><input type="checkbox" value="<?= $reg['paal_idpagoalumno'] ?>"></td> <!-- con checked veo si esta seleccionada -->
+                 <td><input type="checkbox" value="<?= $reg['paal_idpagoalumno'] ?>" name="idpagoalumnos[]"></td> <!-- con checked veo si esta seleccionada -->
              </tr>
             <?php } ?>
         </table>
         <br><br>
         <div class="container" style="text-align: center;">
-                <button type="submit" value="">Enviar</button> <!-- En caso de que pueda cargar un array con los ids, podre enviarlo por un boton mediante el atributo value sin js? -->
+                <input type="submit" value="Enviar" name="btnAceptar"> <!-- En caso de que pueda cargar un array con los ids, podre enviarlo por un boton mediante el atributo value sin js? -->
         </div>
 
-    </div>
+     </div>
+    </form>
+    <br><br><br>
+    <table style="margin: 0 auto;" border="2">
+            <tr>
+                <th>ID Alumnos</th>
+            </tr>
+            <?php if(isset($_GET['btnAceptar'])){ ?> <!-- Pregunto si existe un dato con el nombre btnAceptar -->
+                   <?php if(is_array($_GET['idpagoalumnos'])){ ?> <!-- Una vez que entra pregunto si es un array lo que vino, creo que no es necesario igualmente porque no puedo tirar mensajes de error con Laravel-->
+                        <?php $id_array = $_GET['idpagoalumnos']; ?> <!-- Ahora que se que es un array lo que vino copio el valor en un variable para recorrlo con un foreach -->
+                        <?php foreach ($id_array as $id) { ?> <!-- Recorro el array de ids de pago alumno -->
+                            <tr>
+                                <td><?= $id; ?></td>
+                                <?php } ?>
+                            </tr>
+                        <?php } ?>
+                    <?php } ?>
+    </table>
 
     <div class="main-container">
             <h2>Elija una opcion</h2>
