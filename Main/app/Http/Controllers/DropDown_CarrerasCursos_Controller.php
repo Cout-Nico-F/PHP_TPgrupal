@@ -9,13 +9,7 @@ class DropDown_CarrerasCursos_Controller extends Controller
         
         $resultados = \App\Models\Consultas::BuscarCarreraDao($idAlumno);
 
-        $affectedRows = pg_num_rows($resultados);
-        
-        if($affectedRows != -1) {
-            //De acá sacaríamos para cargar el desplegable con la/s carrera/s que devolvió la consulta
-        } else {
-            //Si da -1, no hay coincidencia
-        }
+        //$row = pg_num_rows($resultados); //Retorna un entero y un -1 en caso de fallo
 
         /*if($row == -1){ //Si no trajo nada
             die("La consulta carrera no trajo un resultado");//TODO: die
