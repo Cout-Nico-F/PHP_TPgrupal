@@ -215,16 +215,12 @@
             <tr>
                 <th>ID Alumnos</th>
             </tr>
-            <?php if(isset($_GET['btnAceptar'])){ ?> <!-- Pregunto si existe un dato con el nombre btnAceptar -->
-                   <?php if(is_array($_GET['idpagoalumnos'])){ ?> <!-- Una vez que entra pregunto si es un array lo que vino, creo que no es necesario igualmente porque no puedo tirar mensajes de error con Laravel-->
-                        <?php $id_array = $_GET['idpagoalumnos']; ?> <!-- Ahora que se que es un array lo que vino copio el valor en un variable para recorrlo con un foreach -->
+                        $id_array = App\Http\Controllers\DropDown_CarrerasCursos_Controller::capturarDatos() <!-- Ahora que se que es un array lo que vino copio el valor en un variable para recorrlo con un foreach -->
                         <?php foreach ($id_array as $id) { ?> <!-- Recorro el array de ids de pago alumno -->
                             <tr>
                                 <td><?= $id; ?></td>
-                                <?php } ?>
                             </tr>
-                        <?php } ?>
-                    <?php } ?>
+                         <?php } ?>
     </table>
 
     <div class="main-container">
