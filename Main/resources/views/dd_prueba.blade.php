@@ -98,13 +98,73 @@
     use Illuminate\Support\Facades\App;
 
 <div style="text-align: center;">
+
+        <!-- 
+            2- Orden de Pago
+            La página inicial del módulo Orden de Pago muestra en un desplegable las carreras o cursos que está realizando 
+            o realizo esta es la consulta:
+            public function BuscarCarreras($user) {
+        /*================================================================
+        ======================== BUSCO LAS CARRERAS ======================
+        ==================================================================*/    
+         $consulta = $this->db->prepare("SELECT alumnos.alum_idalumno,   
+         alumnoscarreracurso.alcc_idccalta,
+         alumnoscarreracurso.alcc_idalucarrcurs,
+         carrerascursosalta.ccal_descripcion FROM (alumnos INNER JOIN
+         alumnoscarreracurso ON alumnos.alum_idalumno =
+         alumnoscarreracurso.alcc_idalumno)
+         INNER JOIN carrerascursosalta ON alumnoscarreracurso.alcc_idccalta =
+         carrerascursosalta.ccal_idccalta WHERE
+         alumnos.alum_idalumno='$user'");        
+         /*==============================================================
+           ====================== EJECUTO LA CONSULTA =====================
+           ==============================================================*/
+        $consulta->execute();
+        /*==============================================================
+        ===================== DEVUELVO EL RESULTADO ====================
+        ==============================================================*/
+        return $consulta;
+        }
+        El $user por el que filtra es el id del alumno. OJO: Nosotros inyectamos este id se supone que lo recibe de otro lado, no sabemos cual
+
+        En el desplegable se carga como value el campo alcc_idalucarrcurs y como
+        descripción ccal_descripcion, una vez que selecciona el form envía el value del ítem
+        seleccionado para buscar las cuotas impagas de esa carrera o curso.
+
+        La búsqueda de las cuotas adeudadas de la carrera o curso seleccionado se realizacon el alcc_idalucarrcurs enviado
+
+        Los datos de esta consulta se cargan en una tabla, cada fila es una cuota o matricula
+        que se adeuda y debe tener un check para seleccionar la mis.ma Seleccionadas las
+        cuotas o matriculas para abonar se ddebe seleccionar el método de pago:
+         - Pago Facil/Rapipago
+         - Mercadopago
+
+        -- Etl metodo BuscarDeudasController($idalucarrcurs) ya trae las deudas y los pone en una tabla 
+        -- Los metodos de pago no se hablo mucho de eso supongo que son radiobuttons igualmente no tienen funcionalidad o sea no mandan nada
+        -- Disminuir el codigo php al minimo posible en el fron
+        -- Falta enviar el value del select que es el idalucarrcurs y enviarselo a el metodo BuscarDeudasController(); el id que tiene esta inyectado
+       
+
+        -->
         <br><br><br><br>
+<<<<<<< HEAD
         <form action="" method="post">
         <select name="select_carreras" id="carreras">
 
         <?php
             $resultado = App\Http\Controllers\DropDown_CarrerasCursos_Controller::json_decode_encode("Carrera",1428697); //json_decode(json_encode(App\Http\Controllers\DropDown_CarrerasCursos_Controller::BuscarCarreraController(1428697)), true); //TODO: Aca vamos a usar session para conseguir este id de alumno.
             //convertimos el objeto en un array
+=======
+        <form action="" method="GET">
+        <select name="select_carreras" id="carreras" >
+
+        <?php
+            $resultado = json_decode(json_encode(App\Http\Controllers\DropDown_CarrerasCursos_Controller::BuscarCarreraController(5833172)), true);//TODO: Aca vamos a usar session para conseguir este id de alumno.
+            //(App\Http\Controllers\DropDown_CarrerasCursos_Controller::BuscarCarreraController(1428697); dice que devuelve un array pero no es asociativo
+            //no se puede recorrer con un foreach por lo tanto lo convierto en un array asociativo con json_decode() pero hay un problema este metodo
+            //solo recibe un string JSON entonces usamos el json_encode() que retorna un string JSON y ahora lo recorremos   
+            //convertimos el objeto en una matriz o array asociativa 
+>>>>>>> b58426b1a59ad143d0d266b711c906cda1540aae
             //json_encode retorna un valor para que sea representado por json_decode enviamos el valor que queramos como primer parametro
             //json_decode le eviamos un string JSON como primer parametro y como segundo un true que sirve para convertirlo en un array asociativo de modo que lo podamos recorrer con un foreach
             //https://www.codewall.co.uk/how-to-fix-the-cannot-use-object-of-type-stdclass-as-array-error-in-php/ -> todo lo saque de aca el error era Cannot use object of type stdClass as array
@@ -114,12 +174,26 @@
             <option value="<?= $res['alcc_idalucarrcurs'] ?>"><?=$res['ccal_descripcion']?></option> 
 
         <?php } ?>
+<<<<<<< HEAD
         </select>
         <input type="submit" name="IDDeuda" value="">
+=======
+
+        <div class="container" style="text-align: center;">
+                <input type="submit" value="Enviar" name="btnEnviar"> <!-- En caso de que pueda cargar un array con los ids, podre enviarlo por un boton mediante el atributo value sin js? -->
+        </div>
+            
+        </select>
+   
+>>>>>>> b58426b1a59ad143d0d266b711c906cda1540aae
 </div>
 
         <br><br><br><br><br><br>
+<<<<<<< HEAD
         <form action="DropDown_CarrerasCursos_Controller.php" method="GET">
+=======
+         <!-- Si action esta vacio te redirige a la pagina actual -->
+>>>>>>> b58426b1a59ad143d0d266b711c906cda1540aae
         <div>
              <!-- No traigo muchos datos porque nose que va en la tabla -->
         <table style="margin: 0 auto;" border="2">
@@ -135,10 +209,15 @@
             </tr>
 
             <?php //TODO:Recordemos que estamos inyectando este id de alumno, ojo: fijarse que si esta sea impago porque si es pago no trae nada 
+<<<<<<< HEAD
             
              $IDDeuda = App\Http\Controllers\DropDown_CarrerasCursos_Controller::BuscarIDDeudaController();
 
              $resultado = App\Http\Controllers\DropDown_CarrerasCursos_Controller::json_decode_encode("Deuda",$IDDeuda); //json_decode(json_encode(App\Http\Controllers\DropDown_CarrerasCursos_Controller::BuscarDeudasController($IDDeuda)), true); 
+=======
+                $id = $_GET['select_carreras'];
+             $resultado = json_decode(json_encode(App\Http\Controllers\DropDown_CarrerasCursos_Controller::BuscarDeudasController($id)), true);
+>>>>>>> b58426b1a59ad143d0d266b711c906cda1540aae
              foreach($resultado as $reg) { ?> <!-- Recorro de nuevo las carreras para mostrarla en la tabla -->
                 <tr>
                  <td><?= $reg['paal_fechadeb']; ?></td>
@@ -157,7 +236,11 @@
         </div>
 
      </div>
+<<<<<<< HEAD
     
+=======
+     </form>
+>>>>>>> b58426b1a59ad143d0d266b711c906cda1540aae
     <br><br><br>
     <table style="margin: 0 auto;" border="2">
                 <caption>Tabla idpagoalumnos </caption>
@@ -199,6 +282,6 @@
     </div>
        
         
-
+                            
 </body>
 </html>
