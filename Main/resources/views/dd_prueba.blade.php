@@ -147,24 +147,16 @@
 
         -->
         <br><br><br><br>
-<<<<<<< HEAD
         <form action="" method="post">
         <select name="select_carreras" id="carreras">
 
         <?php
             $resultado = App\Http\Controllers\DropDown_CarrerasCursos_Controller::json_decode_encode("Carrera",1428697); //json_decode(json_encode(App\Http\Controllers\DropDown_CarrerasCursos_Controller::BuscarCarreraController(1428697)), true); //TODO: Aca vamos a usar session para conseguir este id de alumno.
             //convertimos el objeto en un array
-=======
-        <form action="" method="GET">
-        <select name="select_carreras" id="carreras" >
-
-        <?php
-            $resultado = json_decode(json_encode(App\Http\Controllers\DropDown_CarrerasCursos_Controller::BuscarCarreraController(5833172)), true);//TODO: Aca vamos a usar session para conseguir este id de alumno.
             //(App\Http\Controllers\DropDown_CarrerasCursos_Controller::BuscarCarreraController(1428697); dice que devuelve un array pero no es asociativo
             //no se puede recorrer con un foreach por lo tanto lo convierto en un array asociativo con json_decode() pero hay un problema este metodo
             //solo recibe un string JSON entonces usamos el json_encode() que retorna un string JSON y ahora lo recorremos   
             //convertimos el objeto en una matriz o array asociativa 
->>>>>>> b58426b1a59ad143d0d266b711c906cda1540aae
             //json_encode retorna un valor para que sea representado por json_decode enviamos el valor que queramos como primer parametro
             //json_decode le eviamos un string JSON como primer parametro y como segundo un true que sirve para convertirlo en un array asociativo de modo que lo podamos recorrer con un foreach
             //https://www.codewall.co.uk/how-to-fix-the-cannot-use-object-of-type-stdclass-as-array-error-in-php/ -> todo lo saque de aca el error era Cannot use object of type stdClass as array
@@ -174,26 +166,13 @@
             <option value="<?= $res['alcc_idalucarrcurs'] ?>"><?=$res['ccal_descripcion']?></option> 
 
         <?php } ?>
-<<<<<<< HEAD
         </select>
         <input type="submit" name="IDDeuda" value="">
-=======
-
-        <div class="container" style="text-align: center;">
-                <input type="submit" value="Enviar" name="btnEnviar"> <!-- En caso de que pueda cargar un array con los ids, podre enviarlo por un boton mediante el atributo value sin js? -->
-        </div>
-            
-        </select>
-   
->>>>>>> b58426b1a59ad143d0d266b711c906cda1540aae
 </div>
 
         <br><br><br><br><br><br>
-<<<<<<< HEAD
         <form action="DropDown_CarrerasCursos_Controller.php" method="GET">
-=======
          <!-- Si action esta vacio te redirige a la pagina actual -->
->>>>>>> b58426b1a59ad143d0d266b711c906cda1540aae
         <div>
              <!-- No traigo muchos datos porque nose que va en la tabla -->
         <table style="margin: 0 auto;" border="2">
@@ -209,15 +188,10 @@
             </tr>
 
             <?php //TODO:Recordemos que estamos inyectando este id de alumno, ojo: fijarse que si esta sea impago porque si es pago no trae nada 
-<<<<<<< HEAD
             
              $IDDeuda = App\Http\Controllers\DropDown_CarrerasCursos_Controller::BuscarIDDeudaController();
 
              $resultado = App\Http\Controllers\DropDown_CarrerasCursos_Controller::json_decode_encode("Deuda",$IDDeuda); //json_decode(json_encode(App\Http\Controllers\DropDown_CarrerasCursos_Controller::BuscarDeudasController($IDDeuda)), true); 
-=======
-                $id = $_GET['select_carreras'];
-             $resultado = json_decode(json_encode(App\Http\Controllers\DropDown_CarrerasCursos_Controller::BuscarDeudasController($id)), true);
->>>>>>> b58426b1a59ad143d0d266b711c906cda1540aae
              foreach($resultado as $reg) { ?> <!-- Recorro de nuevo las carreras para mostrarla en la tabla -->
                 <tr>
                  <td><?= $reg['paal_fechadeb']; ?></td>
@@ -236,11 +210,7 @@
         </div>
 
      </div>
-<<<<<<< HEAD
     
-=======
-     </form>
->>>>>>> b58426b1a59ad143d0d266b711c906cda1540aae
     <br><br><br>
     <table style="margin: 0 auto;" border="2">
                 <caption>Tabla idpagoalumnos </caption>
