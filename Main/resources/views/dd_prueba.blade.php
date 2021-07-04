@@ -95,12 +95,15 @@
         }
     </style>
 
+    use Illuminate\Support\Facades\App;
+
 <div style="text-align: center;">
         <br><br><br><br>
+        <form action="" method="post">
         <select name="select_carreras" id="carreras">
 
         <?php
-            $resultado = json_decode(json_encode(App\Http\Controllers\DropDown_CarrerasCursos_Controller::BuscarCarreraController(1428697)), true);//TODO: Aca vamos a usar session para conseguir este id de alumno.
+            $resultado = App\Http\Controllers\DropDown_CarrerasCursos_Controller::json_decode_encode("Carrera",1428697); //json_decode(json_encode(App\Http\Controllers\DropDown_CarrerasCursos_Controller::BuscarCarreraController(1428697)), true); //TODO: Aca vamos a usar session para conseguir este id de alumno.
             //convertimos el objeto en un array
             //json_encode retorna un valor para que sea representado por json_decode enviamos el valor que queramos como primer parametro
             //json_decode le eviamos un string JSON como primer parametro y como segundo un true que sirve para convertirlo en un array asociativo de modo que lo podamos recorrer con un foreach
@@ -111,11 +114,12 @@
             <option value="<?= $res['alcc_idalucarrcurs'] ?>"><?=$res['ccal_descripcion']?></option> 
 
         <?php } ?>
-
         </select>
+        <input type="submit" name="IDDeuda" value="">
 </div>
+
         <br><br><br><br><br><br>
-        <form action="" method="GET">
+        <form action="DropDown_CarrerasCursos_Controller.php" method="GET">
         <div>
              <!-- No traigo muchos datos porque nose que va en la tabla -->
         <table style="margin: 0 auto;" border="2">
@@ -132,7 +136,9 @@
 
             <?php //TODO:Recordemos que estamos inyectando este id de alumno, ojo: fijarse que si esta sea impago porque si es pago no trae nada 
             
-             $resultado = json_decode(json_encode(App\Http\Controllers\DropDown_CarrerasCursos_Controller::BuscarDeudasController(5947235)), true); 
+             $IDDeuda = App\Http\Controllers\DropDown_CarrerasCursos_Controller::BuscarIDDeudaController();
+
+             $resultado = App\Http\Controllers\DropDown_CarrerasCursos_Controller::json_decode_encode("Deuda",$IDDeuda); //json_decode(json_encode(App\Http\Controllers\DropDown_CarrerasCursos_Controller::BuscarDeudasController($IDDeuda)), true); 
              foreach($resultado as $reg) { ?> <!-- Recorro de nuevo las carreras para mostrarla en la tabla -->
                 <tr>
                  <td><?= $reg['paal_fechadeb']; ?></td>
@@ -151,7 +157,7 @@
         </div>
 
      </div>
-    </form>
+    
     <br><br><br>
     <table style="margin: 0 auto;" border="2">
                 <caption>Tabla idpagoalumnos </caption>
@@ -165,6 +171,8 @@
                             </tr>
                          <?php } ?>
     </table>
+    </form>
+    </form>
 
     <div class="main-container">
             <h2>Elija una opcion</h2>

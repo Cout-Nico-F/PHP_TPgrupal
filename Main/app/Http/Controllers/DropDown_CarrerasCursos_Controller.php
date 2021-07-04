@@ -36,7 +36,34 @@ class DropDown_CarrerasCursos_Controller extends Controller
         if(isset($_GET['btnAceptar'])){    //Una vez que entra pregunto si es un array lo que vino, creo que no es necesario igualmente porque no puedo tirar mensajes de error con Laravel
             if(is_array($_GET['idpagoalumnos'])){
                 $id_array = $_GET['idpagoalumnos'];
+                return $id_array;
             }
+        }
+    }
+
+    public static function BuscarIDDeudaController(){
+      if(isset($_POST['IDDeuda']))
+      {
+        if(!empty($_POST['select_carreras']))
+        {
+          $id = $_POST['select_carreras'];
+        } else {
+          echo 'No se encontró deuda';
+        }
+      }
+      return $id;
+    }
+
+    public static function json_decode_encode($tipo,$IDDeuda){
+        switch($tipo){
+            case "Carrera":
+                return json_decode(json_encode(self::BuscarCarreraController($IDDeuda)), true);
+                break;
+            case "Deuda":
+                json_decode(json_encode(self::BuscarDeudasController($IDDeuda)), true);
+                break;
+            default:
+                return 0;
         }
     }
 
