@@ -95,8 +95,6 @@
         }
     </style>
 
-    use Illuminate\Support\Facades\App;
-
 <div style="text-align: center;">
 
         <!-- 
@@ -147,7 +145,7 @@
 
         -->
         <br><br><br><br>
-        <form action="" method="post">
+        <form action="" method="GET">
         <select name="select_carreras" id="carreras">
 
         <?php
@@ -167,7 +165,8 @@
 
         <?php } ?>
         </select>
-        <input type="submit" name="IDDeuda" value="">
+        
+        </form>
 </div>
 
         <br><br><br><br><br><br>
@@ -210,22 +209,22 @@
         </div>
 
      </div>
-    
+     </form>
     <br><br><br>
     <table style="margin: 0 auto;" border="2">
                 <caption>Tabla idpagoalumnos </caption>
             <tr>
                 <th>ID Alumnos</th>
             </tr>
-                        $id_array = App\Http\Controllers\DropDown_CarrerasCursos_Controller::capturarDatos() <!-- Ahora que se que es un array lo que vino copio el valor en un variable para recorrlo con un foreach -->
+                        
+                        <?php  $id_array = App\Http\Controllers\DropDown_CarrerasCursos_Controller::capturarDatos() ?> <!-- Ahora que se que es un array lo que vino copio el valor en un variable para recorrlo con un foreach -->
                         <?php foreach ($id_array as $id) { ?> <!-- Recorro el array de ids de pago alumno -->
                             <tr>
                                 <td><?= $id; ?></td>
                             </tr>
                          <?php } ?>
     </table>
-    </form>
-    </form>
+    
 
     <div class="main-container">
             <h2>Elija una opcion</h2>

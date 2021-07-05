@@ -9,9 +9,9 @@ class DropDown_CarrerasCursos_Controller extends Controller
         
         $resultados = \App\Models\Consultas::BuscarCarreraDao($idAlumno);
 
-        $row = pg_num_rows($resultados); //Retorna un entero y un -1 en caso de fallo
+        //$row = pg_num_rows($resultados); //Retorna un entero y un -1 en caso de fallo
 
-
+        
         /*if($row == -1){ //Si no trajo nada
             die("La consulta carrera no trajo un resultado");//TODO: die
         }*/
@@ -39,14 +39,16 @@ class DropDown_CarrerasCursos_Controller extends Controller
                 return $id_array;
             }
         }
+        return $id_array = [];
     }
 
     public static function BuscarIDDeudaController(){
-      if(isset($_POST['IDDeuda']))
+        $id = 0;
+      if(isset($_GET['IDDeuda']))
       {
-        if(!empty($_POST['select_carreras']))
+        if(!empty($_GET['select_carreras']))
         {
-          $id = $_POST['select_carreras'];
+          $id = $_GET['select_carreras'];
         } else {
           echo 'No se encontró deuda';
         }
@@ -60,7 +62,7 @@ class DropDown_CarrerasCursos_Controller extends Controller
                 return json_decode(json_encode(self::BuscarCarreraController($IDDeuda)), true);
                 break;
             case "Deuda":
-                json_decode(json_encode(self::BuscarDeudasController($IDDeuda)), true);
+                return json_decode(json_encode(self::BuscarDeudasController($IDDeuda)), true);
                 break;
             default:
                 return 0;
