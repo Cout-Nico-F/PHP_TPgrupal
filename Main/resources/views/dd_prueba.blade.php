@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Font Awesome -->
     <script src="https://kit.fontawesome.com/d749d06842.js" crossorigin="anonymous"></script>
+    
     <title>View Dropdown</title>
 </head>
 <body>
@@ -142,14 +143,14 @@
         -- Disminuir el codigo php al minimo posible en el fron
         -- Falta enviar el value del select que es el idalucarrcurs y enviarselo a el metodo BuscarDeudasController(); el id que tiene esta inyectado
        
-
         -->
         <br><br><br><br>
         <form action="" method="GET">
+        <input type="hidden" value="50" id="otro">
         <select name="select_carreras" id="carreras">
 
         <?php
-            $resultado = App\Http\Controllers\DropDown_CarrerasCursos_Controller::json_decode_encode("Carrera",1428697); //json_decode(json_encode(App\Http\Controllers\DropDown_CarrerasCursos_Controller::BuscarCarreraController(1428697)), true); //TODO: Aca vamos a usar session para conseguir este id de alumno.
+            $resultado = App\Http\Controllers\DropDown_CarrerasCursos_Controller::json_decode_encode("Carrera",5833172); //json_decode(json_encode(App\Http\Controllers\DropDown_CarrerasCursos_Controller::BuscarCarreraController(1428697)), true); //TODO: Aca vamos a usar session para conseguir este id de alumno.
             //convertimos el objeto en un array
             //(App\Http\Controllers\DropDown_CarrerasCursos_Controller::BuscarCarreraController(1428697); dice que devuelve un array pero no es asociativo
             //no se puede recorrer con un foreach por lo tanto lo convierto en un array asociativo con json_decode() pero hay un problema este metodo
@@ -165,12 +166,16 @@
 
         <?php } ?>
         </select>
+        <div>
+            <input type="submit" name="IDDeuda" value="Boton">
+        </div>
         
+
         </form>
 </div>
 
         <br><br><br><br><br><br>
-        <form action="DropDown_CarrerasCursos_Controller.php" method="GET">
+        <form action="App\Http\Controllers\DropDown_CarrerasCursos_Controller.php" method="GET">
          <!-- Si action esta vacio te redirige a la pagina actual -->
         <div>
              <!-- No traigo muchos datos porque nose que va en la tabla -->
@@ -209,7 +214,7 @@
         </div>
 
      </div>
-     </form>
+    
     <br><br><br>
     <table style="margin: 0 auto;" border="2">
                 <caption>Tabla idpagoalumnos </caption>
@@ -225,7 +230,7 @@
                          <?php } ?>
     </table>
     
-
+    </form>
     <div class="main-container">
             <h2>Elija una opcion</h2>
             <div class="radio-buttons">
@@ -251,6 +256,6 @@
     </div>
        
         
-                            
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>                     
 </body>
 </html>
